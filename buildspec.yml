@@ -1,14 +1,14 @@
 version: 0.2
 
 phases:
-  pre-build:
+  pre_build:
     commands:
     - echo pre-building...
   build:
     commands:
     - echo building...
     - mvn install
-  post-build:
+  post_build:
     commands:
     - echo post-building...
 artifacts:
