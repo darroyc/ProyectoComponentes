@@ -1,4 +1,4 @@
-# ProyectoComponentes
+# Proyecto Componentes
 
 Deployed using the following links as reference:
 
