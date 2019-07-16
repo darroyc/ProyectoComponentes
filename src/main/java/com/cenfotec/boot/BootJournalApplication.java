@@ -1,6 +1,7 @@
 package com.cenfotec.boot;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import com.cenfotec.boot.repository.JournalRepository;
 
 @SpringBootApplication
 public class BootJournalApplication {
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	@Bean
 	InitializingBean saveData(JournalRepository repo){
@@ -20,7 +22,7 @@ public class BootJournalApplication {
 	repo.save(new Journal("Second entry","Second step","01/02/2016"));
 	repo.save(new Journal("Reading","Reading about Spring","02/01/2016"));
 	repo.save(new Journal("More SpringBoot","This is spring boot","03/01/2016"));
-	repo.save(new Journal("AWS","This was automatically deployed after a commit", LocalDateTime.now().toString()));
+	repo.save(new Journal("AWS","This was automatically deployed after a commit", LocalDate.now().format(formatter)));
 	};
 	}
 
