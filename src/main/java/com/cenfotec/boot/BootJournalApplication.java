@@ -1,5 +1,7 @@
 package com.cenfotec.boot;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +20,7 @@ public class BootJournalApplication {
 	repo.save(new Journal("Second entry","Second step","01/02/2016"));
 	repo.save(new Journal("Reading","Reading about Spring","02/01/2016"));
 	repo.save(new Journal("More SpringBoot","This is spring boot","03/01/2016"));
+	repo.save(new Journal("AWS","This was automatically deployed after a commit", LocalDateTime.now().toString()));
 	};
 	}
 
