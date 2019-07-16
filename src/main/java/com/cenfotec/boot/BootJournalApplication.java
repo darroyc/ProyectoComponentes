@@ -13,10 +13,10 @@ import com.cenfotec.boot.repository.JournalRepository;
 
 @SpringBootApplication
 public class BootJournalApplication {
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	@Bean
 	InitializingBean saveData(JournalRepository repo){
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	return () -> {
 	repo.save(new Journal("First entry","Primer lab de Spring boot","01/01/2016"));
 	repo.save(new Journal("Second entry","Second step","01/02/2016"));
