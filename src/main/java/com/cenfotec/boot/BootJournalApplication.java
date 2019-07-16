@@ -16,13 +16,14 @@ public class BootJournalApplication {
 	
 	@Bean
 	InitializingBean saveData(JournalRepository repo){
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");        
+	String date = LocalDate.now().format(formatter);
 	return () -> {
 	repo.save(new Journal("First entry","Primer lab de Spring boot","01/01/2016"));
 	repo.save(new Journal("Second entry","Second step","01/02/2016"));
 	repo.save(new Journal("Reading","Reading about Spring","02/01/2016"));
 	repo.save(new Journal("More SpringBoot","This is spring boot","03/01/2016"));
-	repo.save(new Journal("AWS","This was automatically deployed after a commit", LocalDate.now().format(formatter)));
+	repo.save(new Journal("AWS","This was automatically deployed after a commit", date));
 	};
 	}
 
