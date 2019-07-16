@@ -1,5 +1,8 @@
 # Proyecto Componentes
 
+Deployment URL:
+* http://proyectocomponentes-env.dtsgq2pppd.us-east-2.elasticbeanstalk.com/
+
 Deployed using the following links as reference:
 
 * https://medium.com/@ryanzhou7/running-spring-boot-on-amazon-web-services-for-free-f3b0aeec809
