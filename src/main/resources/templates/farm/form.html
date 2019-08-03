@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Registrar una finca</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div class="card mb-3">
+					<div class="card-header">Registrar una finca</div>
+					<div class="card-body">
+						<form action="#" th:action="@{/saveFarm}" th:object="${newFarm}"
+							method="POST">
+
+							<div class="form-row">
+								<div class="col-md-2">
+									<div class="form-group">
+										<label for="firstName">Id</label> <input type="text"
+											id="firstName" class="form-control" th:field="*{id}" readonly>
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="form-group">
+										<label for="firstName">Nombre</label> <input type="text"
+											id="firstName" class="form-control" th:field="*{name}">
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="form-group">
+										<label for="lastName">Telefonos</label> <input type="text"
+											id="lastName" class="form-control" th:field="*{phones}"
+											required="required">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="form-row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="inputEmail">Direccion</label> <input type="text"
+											id="inputEmail" class="form-control" th:field="*{address}"
+											required="required">
+									</div>
+								</div>
+
+							</div>
+							<div class="form-row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="inputPassword">Espacio construido</label><input
+											type="text" id="inputPassword" class="form-control"
+											th:field="*{constructedArea}" required="required">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="confirmPassword">Espacio para gallinas</label> <input
+											type="text" id="confirmPassword" class="form-control"
+											th:field="*{productionArea}" required="required">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="confirmPassword">Capacidad de bodegaje</label> <input
+											type="text" id="bodega" class="form-control"
+											th:field="*{storeArea}" required="required">
+									</div>
+								</div>
+							</div>
+							<input class="btn btn-primary" type="submit" value="Guardar" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
