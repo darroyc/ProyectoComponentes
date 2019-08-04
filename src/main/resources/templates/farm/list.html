@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Listado fincas</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div>
+					<div class="card mb-3">
+						<div class="card-header">Listado fincas</div>
+						<div class="card-body">
+							<div class="button-bar">
+								<a class="btn btn-primary text-white"
+									href="/addFarm">Agregar</a>
+							</div>
+							<br>
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%"
+									cellspacing="0">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Empleados</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody th:each="f : ${farms}">
+										<tr>
+											<td th:text="${f.id}"></td>
+											<td th:text="${f.name}"></td>
+											<td th:text="${f.employeeList.size()}"></td>
+											<td><a class="btn btn-primary text-white"
+												th:href="@{'/farm/' + ${f.id}}"> Detalles</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

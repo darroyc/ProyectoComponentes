@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Registrar empleado</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div class="card mb-3">
+					<div class="card-header">Registrar empleado</div>
+					<div class="card-body">
+						<form action="#" th:action="@{'/saveEmp/' + ${farmId}}"
+							th:object="${newEmployee}" method="POST">
+
+							<div class="form-row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="firstName">Nombre</label> <input
+											type="text" id="firstName" class="form-control"
+											th:field="*{name}">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="firstName">Apellido</label> <input
+											type="text" id="firstName" class="form-control"
+											th:field="*{lastName}">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Tipo</label> <select
+											class="form-control" id="type" th:field="*{type}">
+											<option value="1">Veterinario</option>
+											<option value="2">Peon</option>
+											<option value="3">Supervisor</option>
+											<option value="4">Seguridad</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<input class="btn btn-primary" type="submit" value="Guardar" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
