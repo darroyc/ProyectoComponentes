@@ -1,4 +1,4 @@
-# Proyecto Componentes
+# Earned Value Project
 
 Deployment URL:
 * http://proyectocomponentes-env.dtsgq2pppd.us-east-2.elasticbeanstalk.com/
