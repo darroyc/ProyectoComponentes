@@ -1,4 +1,4 @@
-package com.cenfotec.examen2.web;
+package com.cenfotec.pm.web;
 
 import java.util.Optional;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.cenfotec.examen2.domain.Employee;
-import com.cenfotec.examen2.domain.Farm;
-import com.cenfotec.examen2.repository.EmployeeRepository;
-import com.cenfotec.examen2.repository.FarmRepository;
+import com.cenfotec.pm.domain.Employee;
+import com.cenfotec.pm.domain.Farm;
+import com.cenfotec.pm.repository.EmployeeRepository;
+import com.cenfotec.pm.repository.FarmRepository;
 
 @Controller
 public class EmployeeController {
