@@ -1,4 +1,4 @@
-package com.cenfotec.examen2.domain;
+package com.cenfotec.pm.domain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
