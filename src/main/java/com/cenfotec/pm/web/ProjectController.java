@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.cenfotec.pm.domain.Farm;
 import com.cenfotec.pm.domain.Project;
+import com.cenfotec.pm.repository.ActivityRepository;
 import com.cenfotec.pm.repository.ProjectRepository;
 
 @Controller
@@ -20,6 +20,8 @@ public class ProjectController {
 
 	@Autowired
 	ProjectRepository repoProj;
+	@Autowired
+	ActivityRepository repoAct;
 
 	@RequestMapping(value = "/projects", method = RequestMethod.GET)
 	public String listProjects(Model model) {
@@ -38,8 +40,8 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/saveProj", method = RequestMethod.POST)
 	public RedirectView saveProj(Project newProj, BindingResult result, Model model) {
-		repoProj.save(newProj);
-		return new RedirectView("projects");
+		newProj = repoProj.save(newProj);
+		return new RedirectView("/projects");
 	}
 	
 	
@@ -53,7 +55,19 @@ public class ProjectController {
 
 		e.setState(0);
 		repoProj.save(e);
-		return new RedirectView("project/list");
+		return new RedirectView("/projects");
+	}
+	
+	@RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
+	public String farmDetail(Model model, @PathVariable Long id) {
+		Project p = null;
+		Optional<Project> found = repoProj.findById(id);
+		if (found.isPresent()) {
+			p = found.get();
+			p.setActivities(repoAct.findByProjectId(p.getId()));
+		}
+		model.addAttribute("p", p);
+		return "project/detail";
 	}
 
 	@RequestMapping(value = "/findProject", method = RequestMethod.POST)

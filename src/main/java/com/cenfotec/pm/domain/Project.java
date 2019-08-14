@@ -1,8 +1,13 @@
 package com.cenfotec.pm.domain;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.springframework.data.annotation.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +35,6 @@ public class Project {
 	private String name;
 	private String description;
 	private String owner;
-	private LocalDate startDate;
-	private LocalDate endDate;
 	private Long plannedValue;
 	private Long earnedValue;
 	private Long scheduleVariance;
@@ -37,9 +42,14 @@ public class Project {
 	private Long schedulePerformanceIndex;
 	private Long costPerformanceIndex;
 	private int state;
+	@Basic
+	private Date startDate;
+	@Basic
+	private Date endDate;
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="project", cascade = CascadeType.ALL)
 	private List<Activity> activities;
 	
+		
 	public Project() {
 		this.state = 1;
 	}
@@ -91,26 +101,25 @@ public class Project {
 	}
 
 
-
-	public LocalDate getStartDate() {
+	
+	public Date getStartDate() {
 		return startDate;
 	}
+	
+	
 
-
-
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
 
-
-	public LocalDate getEndDate() {
+	
+	public Date getEndDate() {
 		return endDate;
 	}
+	
 
-
-
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Detalle Proyecto</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div>
+					<div class="card mb-3">
+						<div class="card-header">Detalles de: <span th:text="${p.name}"> </div>
+						<div class="card-body">
+							<div class="button-bar">
+								<a class="btn btn-primary text-white"
+									th:href="@{'/updateProject/' + ${p.id}}">Editar</a>
+							</div>
+							<br>
+							<form>
+
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="description">Descripción</label> <input type="text"
+												id="description" class="form-control" th:field="${p.description}"
+												required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for=owner>Dueño</label> <input type="text"
+												id="owner" class="form-control" th:field="${p.owner}"
+												required="required" readonly>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="startDate">Fecha inicio</label> <input type="date"
+												id="startDate" class="form-control" th:field="${p.startDate}" readonly>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="endDate">Fecha fin</label> <input type="date"
+												id="endDate" class="form-control" th:field="${p.endDate}"
+												required="required" readonly>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="plannedValue">Valor planeado</label><input
+												type="number" id="plannedValue" class="form-control"
+												th:field="${p.plannedValue}" required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="earnedValue">Valor ganado</label> <input
+												type="text" id="earnedValue" class="form-control"
+												th:field="${p.earnedValue}" required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="scheduleVariance">scheduleVariance</label> <input
+												type="text" id="scheduleVariance" class="form-control"
+												th:field="${p.scheduleVariance}" required="required" readonly>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="costVariance">costVariance</label><input
+												type="number" id="costVariance" class="form-control"
+												th:field="${p.costVariance}" required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="schedulePerformanceIndex">schedulePerformanceIndex</label> <input
+												type="number" id="schedulePerformanceIndex" class="form-control"
+												th:field="${p.schedulePerformanceIndex}" required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="costPerformanceIndex">costPerformanceIndex</label> <input
+												type="number" id="costPerformanceIndex" class="form-control"
+												th:field="${p.costPerformanceIndex}" required="required" readonly>
+										</div>
+									</div>
+								</div>
+								
+							</form>
+						</div>
+					</div>
+
+					<div class="card mb-3">
+						<div class="card-header">Lista de actividades</div>
+						<div class="card-body">
+							<div class="button-bar">
+								<a class="btn btn-primary text-white"
+									th:href="@{'/addActivity/' + ${p.id}}">Agregar</a>
+							</div>
+							<br>
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Descripción</th>
+											<th>Estado</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody th:each="e : ${p.activities}">
+										<tr>
+											<td th:text="${e.id}"></td>
+											<td th:text="${e.name}"></td>
+											<td th:text="${e.description}"></td>
+											<td th:text="${e.getState()}"></td>
+											<td><a class="btn btn-primary text-white" th:href="@{'/activity/' + ${e.id}}"> Detalle</a>
+											<a class="btn btn-danger text-white" th:href="@{'/activity/delete/' + ${e.id}}">Eliminar</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
