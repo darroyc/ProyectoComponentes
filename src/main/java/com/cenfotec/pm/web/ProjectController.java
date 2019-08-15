@@ -59,7 +59,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
-	public String farmDetail(Model model, @PathVariable Long id) {
+	public String projDetail(Model model, @PathVariable Long id) {
 		Project p = null;
 		Optional<Project> found = repoProj.findById(id);
 		if (found.isPresent()) {
@@ -69,6 +69,27 @@ public class ProjectController {
 		model.addAttribute("p", p);
 		return "project/detail";
 	}
+	
+	@RequestMapping(value = "/editProject/{id}", method = RequestMethod.GET)
+	public String projUpdate(Model model, @PathVariable Long id) {
+		Project p = null;
+		Optional<Project> found = repoProj.findById(id);
+		if (found.isPresent()) {
+			p = found.get();
+			p.setActivities(repoAct.findByProjectId(p.getId()));
+		}
+		model.addAttribute("p", p);
+		return "project/edit";
+		
+	}
+	
+	@RequestMapping(value = "/updateProj/{id}", method = RequestMethod.POST)
+	public RedirectView updateProj(@PathVariable Long id, Project p, BindingResult result, Model model) {
+		p.setId(id);
+		p = repoProj.save(p);
+		return new RedirectView("/projects");
+	}
+	
 
 	@RequestMapping(value = "/findProject", method = RequestMethod.POST)
 	public String findByNameDescription(Project e, BindingResult result, Model model) {

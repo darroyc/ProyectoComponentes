@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Editar proyecto</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div class="card mb-3">
+					<div class="card-header">Editar proyecto</div>
+					<div class="card-body">
+						<form action="#" th:action="@{'/updateProj/' + ${p.id}}" th:object ="${p}" method="POST">
+
+							<div class="form-row">
+							
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="name">Nombre</label> <input type="text"
+												id="name" class="form-control" th:field="${p.name}"
+												required="required">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="description">Descripción</label> <input type="text"
+												id="description" class="form-control" th:field="${p.description}"
+												required="required">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for=owner>Dueño</label> <input type="text"
+												id="owner" class="form-control" th:field="${p.owner}"
+												required="required" >
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="startDate">Fecha inicio</label> <input type="date"
+												id="startDate" class="form-control" th:field="${p.startDate}">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="endDate">Fecha fin</label> <input type="date"
+												id="endDate" class="form-control" th:field="${p.endDate}"
+												required="required">
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="plannedValue">Valor planeado</label><input
+												type="number" id="plannedValue" class="form-control"
+												th:field="${p.plannedValue}" >
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="earnedValue">Valor ganado</label> <input
+												type="number" id="earnedValue" class="form-control"
+												th:field="${p.earnedValue}"  >
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="scheduleVariance">scheduleVariance</label> <input
+												type="number" id="scheduleVariance" class="form-control"
+												th:field="${p.scheduleVariance}" >
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="costVariance">costVariance</label><input
+												type="number" id="costVariance" class="form-control"
+												th:field="${p.costVariance}"  >
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="schedulePerformanceIndex">schedulePerformanceIndex</label> <input
+												type="number" id="schedulePerformanceIndex" class="form-control"
+												th:field="${p.schedulePerformanceIndex}" >
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="costPerformanceIndex">costPerformanceIndex</label> <input
+												type="number" id="costPerformanceIndex" class="form-control"
+												th:field="${p.costPerformanceIndex}"  >
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+										<input class="btn btn-primary" type="submit" value="Guardar cambios" />
+								</div>
+	
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
