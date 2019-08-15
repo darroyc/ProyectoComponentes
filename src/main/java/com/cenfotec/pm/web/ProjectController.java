@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.cenfotec.pm.domain.Activity;
 import com.cenfotec.pm.domain.Project;
 import com.cenfotec.pm.repository.ActivityRepository;
 import com.cenfotec.pm.repository.ProjectRepository;
@@ -67,6 +68,7 @@ public class ProjectController {
 			p.setActivities(repoAct.findByProjectId(p.getId()));
 		}
 		model.addAttribute("p", p);
+		model.addAttribute("blankActivity", new Activity());
 		return "project/detail";
 	}
 	
