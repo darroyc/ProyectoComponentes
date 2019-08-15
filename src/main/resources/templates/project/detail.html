@@ -155,7 +155,7 @@
 											<td th:text="${e.name}"></td>
 											<td th:text="${e.description}"></td>
 											<td th:text="${e.getState()}"></td>
-											<td><a class="btn btn-primary text-white" th:href="@{'/activity/' + ${e.id}}"> Detalle</a>
+											<td><a class="btn btn-primary text-white" th:href="@{/detailActivity(idAct=${e.id}, idProj=${p.id})}"> Detalle</a>
 											<a class="btn btn-danger text-white" th:href="@{'/activity/delete/' + ${e.id}}">Eliminar</a></td>
 										</tr>
 									</tbody>
