@@ -26,7 +26,7 @@ public class ActivityController {
 	ProjectRepository repoProj;
 
 	
-	@RequestMapping(value = "/detailActivity", method = RequestMethod.GET)
+	@RequestMapping(value = "/detailActivity", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	public String projDetail(Model model, @RequestParam("idAct") Long idAct, @RequestParam("idProj") Long idProj) {
 		Activity a = null;
 		Optional<Activity> found = repoAct.findById(idAct);

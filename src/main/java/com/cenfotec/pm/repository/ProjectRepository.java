@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.repository.query.Param;
 
-import com.cenfotec.pm.domain.Employee;
 import com.cenfotec.pm.domain.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {	
