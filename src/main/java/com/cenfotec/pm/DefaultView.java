@@ -9,6 +9,6 @@ public class DefaultView implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers( ViewControllerRegistry registry ) {
-        registry.addRedirectViewController("/", "/projects");
+    	registry.addViewController("/").setViewName("home");
     }
 }
