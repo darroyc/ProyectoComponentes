@@ -1,0 +1,48 @@
+spring.datasource.url:
+  jdbc:mariadb://35.226.36.120:3306/proyecto
+spring.datasource.username:
+  root
+spring.datasource.password:
+  EjNJZ6DvA4jc
+spring.datasource.driverclassName:
+  org.mariadb.jdbc.Driver
+spring.resources.add-mappings:
+  true
+server.port:
+  5000
+spring.jpa.show-sql:
+  true
+spring.jpa.generate-ddl:
+  true
+spring.jpa.hibernate.ddl-auto:
+  update
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation:
+  true
+spring.data.jpa.repositories.enabled:
+  true
+spring.messages.encoding:
+  UTF-8
+server.tomcat.uri-encoding:
+  UTF-8
+spring.http.encoding.charset:
+  UTF-8
+spring.thymeleaf.mode:
+  HTML5
+spring.thymeleaf.encoding:
+  UTF-8
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            clientId: "5mhomhaf9j4158idgadoob9or2"
+            clientSecret: "147jehhu3f3nhgfm11prmg7c3vhhmha8usa3o8jefq0jdb5nks21"
+            scope: "openid"
+            redirectUriTemplate: "http://localhost:5000/projects"
+            clientName: "Componentes"
+        provider:
+          cognito:
+            issuerUri: "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_7mF9XJntY"
+            usernameAttribute: "cognito:email"

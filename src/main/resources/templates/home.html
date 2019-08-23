@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
-    <head>
-        <title>EVM</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col" layout:fragment="content">
-                    <h1>Welcome to the Index page</h1>
-                    <br>This content is replacing the content of the layout:fragment="content"<br>
-                    placeholder in layout.html</p>
-                </div>
-            </div>
-        </div>
-    </body>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>EVM</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+</head>
+<body>
+	<section class="section">
+		<div class="container has-text-centered" layout:fragment="content">
+			<div>
+				<h1 class="title">OAuth2 Spring Security Cognito Demo</h1>
+
+				<div sec:authorize="isAuthenticated()">
+					<div class="box">
+						Hello, 
+					</div>
+				</div>
+
+				<div sec:authorize="isAnonymous()">
+					<div class="box">
+						<a class="button login is-primary"
+							th:href="@{/projects}">Log in with Amazon
+							Cognito</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
 </html>
