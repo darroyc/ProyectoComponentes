@@ -9,19 +9,11 @@
 	<section class="section">
 		<div class="container has-text-centered" layout:fragment="content">
 			<div>
-				<h1 class="title">OAuth2 Spring Security Cognito Demo</h1>
+				<h1 class="title">EVM</h1>
 
 				<div sec:authorize="isAuthenticated()">
 					<div class="box">
-						Hello, 
-					</div>
-				</div>
-
-				<div sec:authorize="isAnonymous()">
-					<div class="box">
-						<a class="button login is-primary"
-							th:href="@{/projects}">Log in with Amazon
-							Cognito</a>
+						Hola, <strong th:text="${#authentication.name}"></strong>!
 					</div>
 				</div>
 			</div>

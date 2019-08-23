@@ -39,10 +39,10 @@ spring:
           cognito:
             clientId: "5mhomhaf9j4158idgadoob9or2"
             clientSecret: "147jehhu3f3nhgfm11prmg7c3vhhmha8usa3o8jefq0jdb5nks21"
-            scope: "openid"
-            redirectUriTemplate: "http://localhost:5000/projects"
+            scope: openid
+            redirectUriTemplate: "http://localhost:5000/login/oauth2/code/cognito"
             clientName: "Componentes"
         provider:
           cognito:
-            issuerUri: "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_7mF9XJntY"
-            usernameAttribute: "cognito:email"
+            issuerUri: https://cognito-idp.us-east-2.amazonaws.com/us-east-2_7mF9XJntY
+            usernameAttribute: name
