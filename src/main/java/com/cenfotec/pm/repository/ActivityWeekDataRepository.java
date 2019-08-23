@@ -11,4 +11,6 @@ import com.cenfotec.pm.domain.ActivityWeekData;
 public interface ActivityWeekDataRepository extends JpaRepository<ActivityWeekData, Long> {
 
 	List<ActivityWeekData> findByActivity_ProjectIdAndWeekDataId_Type(Long identifier, String type);
+
+	List<ActivityWeekData> findByWeekDataId_IdentifierAndWeekDataId_Type(Long identifier, String type);
 }

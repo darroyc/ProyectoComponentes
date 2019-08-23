@@ -1,9 +1,11 @@
 package com.cenfotec.pm.web.calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 
+import com.cenfotec.pm.domain.Activity;
 import com.cenfotec.pm.domain.ActivityWeekData;
 import com.cenfotec.pm.domain.ProjectWeekData;
 import com.cenfotec.pm.web.BaseController;
@@ -12,18 +14,22 @@ import com.cenfotec.pm.web.BaseController;
 public class Statistics extends BaseController {
 	ProjectWeekData temp;
 	
-	public void updateCumulativeValues(List<ActivityWeekData> weekDataList, String type) {
-		if(!weekDataList.isEmpty()) {		
-			Long projectId = weekDataList.get(0).getActivity().getProjectId();		
-			for(ActivityWeekData weekData : weekDataList) {
-					temp = projectWeekDataRepository.findByIdentifierTypeWeek(projectId,
-							type,
+	public List<ActivityWeekData> updateCumulativeValues(List<Activity> activitiesList, String  type) {
+		List<ActivityWeekData> weekDataList = new ArrayList<>();
+		if(!activitiesList.isEmpty()) {		
+			Long projectId = activitiesList.get(0).getProjectId();
+			for(int i = 0; i<activitiesList.size(); i++) {		
+				weekDataList = activityWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_Type(activitiesList.get(i).getId(), type);
+				for(ActivityWeekData weekData : weekDataList) {
+					temp = projectWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_TypeAndWeekDataId_Week(projectId,
+							"C"+type,
 							weekData.getWeekDataId().getWeek());
 					temp.setValue(temp.getValue() + weekData.getValue());
 					projectWeekDataRepository.save(temp);
-				
+				}
 			}
 		}
+		return weekDataList;
 	}
 
 	public void updateMixedStatistics(List<ProjectWeekData> cpvdata, List<ProjectWeekData> cevdata, List<ProjectWeekData> cacdata) {

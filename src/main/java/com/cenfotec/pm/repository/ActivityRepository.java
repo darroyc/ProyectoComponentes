@@ -18,7 +18,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 	@EntityGraph(value = "Activity.activityWeekData", type = EntityGraphType.FETCH)
 	public Activity findById(int id);	
 	
-	List<Activity> findByPojectIdAndActivityWeekData_WeekDataId_Type(Long idProyecto, String type);
+	List<Activity> findByProjectIdAndActivityWeekData_WeekDataId_Type(Long idProyecto, String type);
 
 	@Query(value = "select * FROM activity where project = ?1", nativeQuery = true)
 	List<Activity> findByProjectId(@Param("id") Long idProyecto);

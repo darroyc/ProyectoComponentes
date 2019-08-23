@@ -79,13 +79,11 @@ public class ProjectController extends BaseController{
 			p.setActivities(activityRepository.findByProjectId(p.getId()));
 		}
 		
-		List<ActivityWeekData> pvdata = activityWeekDataRepository.findByActivity_ProjectIdAndWeekDataId_Type(id, "PV");
-		List<ActivityWeekData> evdata = activityWeekDataRepository.findByActivity_ProjectIdAndWeekDataId_Type(id, "AC");
-		List<ActivityWeekData> acdata = activityWeekDataRepository.findByActivity_ProjectIdAndWeekDataId_Type(id, "EV");
+		List<Activity> activities = projectRepository.findById(id).get().getActivities();
 		
-		statistics.updateCumulativeValues(pvdata, "CPV");
-		statistics.updateCumulativeValues(acdata, "CAC");
-		statistics.updateCumulativeValues(evdata, "CEV");
+		List<ActivityWeekData> pvActivities = statistics.updateCumulativeValues(activities, "PV");
+		List<ActivityWeekData> acActivities = statistics.updateCumulativeValues(activities, "AC");
+		List<ActivityWeekData> evActivities = statistics.updateCumulativeValues(activities, "EV");
 		
 		List<ProjectWeekData> cpvdata = projectWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_Type(id, "CPV");
 		List<ProjectWeekData> cevdata = projectWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_Type(id, "CAC");
@@ -96,9 +94,9 @@ public class ProjectController extends BaseController{
 		model.addAttribute("p", p);
 		model.addAttribute("blankActivity", new Activity());
 		model.addAttribute("activities", activityRepository.findByProjectId(id));
-		model.addAttribute("pvdata", pvdata);
-		model.addAttribute("evdata", evdata);
-		model.addAttribute("acdata", acdata);
+		model.addAttribute("pvdata", pvActivities);
+		model.addAttribute("evdata", evActivities);
+		model.addAttribute("acdata", acActivities);
 		model.addAttribute("cpvdata", cpvdata);
 		model.addAttribute("cacdata", cevdata);
 		model.addAttribute("cevdata", cacdata);
