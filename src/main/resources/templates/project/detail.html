@@ -40,16 +40,23 @@
 								</div>
 
 								<div class="form-row">
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="startDate">Fecha inicio</label> <input type="date"
 												id="startDate" class="form-control" th:field="${p.startDate}" readonly>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label for="endDate">Fecha fin</label> <input type="date"
 												id="endDate" class="form-control" th:field="${p.endDate}"
+												required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="weeks">Semanas</label> <input type="number"
+												id="weeks" class="form-control" th:field="${p.weeks}"
 												required="required" readonly>
 										</div>
 									</div>
@@ -58,47 +65,9 @@
 								<div class="form-row">
 									<div class="col-md-4">
 										<div class="form-group">
-											<label for="plannedValue">Valor planeado</label><input
-												type="number" id="plannedValue" class="form-control"
-												th:field="${p.plannedValue}" required="required" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="earnedValue">Valor ganado</label> <input
-												type="text" id="earnedValue" class="form-control"
-												th:field="${p.earnedValue}" required="required" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="scheduleVariance">SV</label> <input
-												type="text" id="scheduleVariance" class="form-control"
-												th:field="${p.scheduleVariance}" required="required" readonly>
-										</div>
-									</div>
-								</div>
-								
-								<div class="form-row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="costVariance">CV</label><input
-												type="number" id="costVariance" class="form-control"
-												th:field="${p.costVariance}" required="required" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="schedulePerformanceIndex">SPI</label> <input
-												type="number" id="schedulePerformanceIndex" class="form-control"
-												th:field="${p.schedulePerformanceIndex}" required="required" readonly>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="costPerformanceIndex">CPI</label> <input
-												type="number" id="costPerformanceIndex" class="form-control"
-												th:field="${p.costPerformanceIndex}" required="required" readonly>
+											<label for="budget">Presupuesto</label><input
+												type="number" id="budget" class="form-control"
+												th:field="${p.budget}" required="required" readonly>
 										</div>
 									</div>
 								</div>
@@ -162,6 +131,127 @@
 										</tr>
 									</tbody>
 								</table>
+							</div>
+						</div>
+					</div>
+					<div class="card mb-3">
+						<div class="card-header">M&eacute;tricas</div>
+						<div class="card-body">
+							<div class="button-bar float-md-right">
+								<a class="btn btn-primary text-white"
+									th:href="@{'/addWeekData/' + ${p.id}}">Actualizar</a>
+							</div>
+							<h3>Planned Valued</h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="a,iterStat : ${activities}">
+												<td th:text="${a.name}"></td>
+												<td th:each="pvd,iterStat : ${pvdata}" th:text="${pvd.value}" ><!-- th:if="${iterStat.count} &le; ${weeksq}" --></td>
+											</tr>
+											<tr>
+												<td>Cumulative Planned Value (EV)</td>
+												<td th:each="cpvd : ${cpvdata}" th:text="${cpvd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<h3>Earned Valued</h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="a : ${activities}">
+												<td th:text="${a.name}"></td>
+												<td th:each="evd : ${evdata}" th:text="${evd.value}"></td>
+											</tr>
+											<tr>
+												<td>Cumulative Earned Value (EV)</td>
+												<td th:each="cevd : ${cevdata}" th:text="${cevd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<h3>Actual Cost</h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="a : ${activities}">
+												<td th:text="${a.name}"></td>
+												<td th:each="acd : ${acdata}" th:text="${acd.value}"></td>
+											</tr>
+											<tr>
+												<td>Cumulative Actual Cost (AC)</td>
+												<td th:each="cacd : ${cacdata}" th:text="${cacd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<h3>Varianzas, &Iacute;ndices y Previsiones </h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Cost Variance (CV)</td>
+												<td th:each="cvd : ${cvdata}" th:text="${cvd.value}"></td>
+											</tr>
+											<tr>
+												<td>Schedule Variance (SV)</td>
+												<td th:each="svd : ${svdata}" th:text="${svd.value}"></td>
+											</tr>
+											<tr>
+												<td>Cost Performance Index (CPI)</td>
+												<td th:each="cpid : ${cpidata}" th:text="${cpid.value}"></td>
+											</tr>
+											<tr>
+												<td>Schedule Performance Index (SPI)</td>
+												<td th:each="spid : ${spidata}" th:text="${spid.value}"></td>
+											</tr>
+											<tr>
+												<td>Estimate at Completion (EAC)</td>
+												<td th:each="eacd : ${eacdata}" th:text="${eacd.value}"></td>
+											</tr>
+											<tr>
+												<td>Estimate to Completion (ETC)</td>
+												<td th:each="etcd : ${etcdata}" th:text="${etcd.value}"></td>
+											</tr>
+											<tr>
+												<td>Variance at Completion (VAC)</td>
+												<td th:each="vacd : ${vacdata}" th:text="${vacd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -17,24 +17,31 @@
 
 							<div class="form-row">
 							
-									<div class="col-md-6">
+									<div class="col-md-3">
 										<div class="form-group">
 											<label for="name">Nombre</label> <input type="text"
 												id="name" class="form-control" th:field="${p.name}"
 												required="required">
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-3">
 										<div class="form-group">
 											<label for="description">Descripci&oacute;n</label> <input type="text"
 												id="description" class="form-control" th:field="${p.description}"
 												required="required">
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-3">
 										<div class="form-group">
 											<label for=owner>Due&ntilde;o</label> <input type="text"
 												id="owner" class="form-control" th:field="${p.owner}"
+												required="required" >
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label budget>Presupuesto</label> <input type="budget"
+												id="budget" class="form-control" th:field="${p.owner}"
 												required="required" >
 										</div>
 									</div>
@@ -55,9 +62,11 @@
 										</div>
 									</div>
 								</div>
-								
-								<div class="col-md-4">
-										<input class="btn btn-primary" type="submit" value="Guardar cambios" />
+
+								<div class="form-row">
+									<div class="col-md-4">
+											<input class="btn btn-primary" type="submit" value="Guardar cambios" />
+									</div>
 								</div>
 	
 						</form>
