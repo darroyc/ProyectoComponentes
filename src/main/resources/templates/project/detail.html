@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Detalle Proyecto</title>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['line']});
+	google.setOnLoadCallback(drawChart);
+	debugger;
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Semana');
+        data.addColumn('number', 'Valor Planeado(PV)');
+        data.addColumn('number', 'Valor Ganado(EV)');
+        data.addColumn('number', 'Varianza del Costo(AC)');
+        
+        var cpvdata = [[${cpvdata}]]
+        var cacdata = [[${cacdata}]]
+        var cevdata = [[${cevdata}]]
+        
+        var list = [];
+        
+        for (var i = 0; i < list.length; i ++ ){
+            data.addRows([
+            	[cpvdata[i].weekDataId.week, cpvdata[i].value, cevdata[i].value, cacdata[i].value] 
+            	]);
+         }
+
+        var options = {
+          chart: {
+            title: 'Gr&aacute;fico de valor ganado',
+            subtitle: 'En d&ocaute;lares (USD)'
+          },
+          width: 900,
+          height: 500,
+          axes: {
+            x: {
+              0: {side: 'top'}
+            }
+          }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('graphic'));
+
+        chart.draw(data, google.charts.Line.convertOptions(options));
+      }
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div>
+					<div class="card mb-3">
+						<div class="card-header">Detalles de: <span th:text="${p.name}"> </div>
+						<div class="card-body">
+							<div class="button-bar">
+								<a class="btn btn-primary text-white"
+									th:href="@{'/editProject/' + ${p.id}}">Editar</a>
+							</div>
+							<br>
+							<form>
+
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="description">Descripci&oacute;n</label> <input type="text"
+												id="description" class="form-control" th:field="${p.description}"
+												required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for=owner>Due&ntilde;o</label> <input type="text"
+												id="owner" class="form-control" th:field="${p.owner}"
+												required="required" readonly>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="startDate">Fecha inicio</label> <input type="date"
+												id="startDate" class="form-control" th:field="${p.startDate}" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="endDate">Fecha fin</label> <input type="date"
+												id="endDate" class="form-control" th:field="${p.endDate}"
+												required="required" readonly>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="weeks">Semanas</label> <input type="number"
+												id="weeks" class="form-control" th:field="${p.weeks}"
+												required="required" readonly>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="budget">Presupuesto</label><input
+												type="number" id="budget" class="form-control"
+												th:field="${p.budget}" required="required" readonly>
+										</div>
+									</div>
+								</div>
+								
+							</form>
+						</div>
+					</div>
+					<div class="card mb-3">
+						<div class="card-header">Lista de actividades</div>
+						<div class="card-body">
+							<div class="button-bar">
+								<a class="btn btn-primary text-white"
+									th:href="@{'/addActivity/' + ${p.id}}">Agregar</a>
+							</div>
+							
+							<div class="col-lg-12">
+								<form action="#" th:action="@{'/findActivity/' + ${p.id}}"
+									th:object="${blankActivity}" method="POST">
+
+									<div class="form-row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="name">Nombre</label> <input type="text"
+													id="nameA" class="form-control" 
+													th:field="*{name}">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="description">Descripci&oacute;n</label> <input type="text"
+													id="descriptionA" class="form-control" 
+													th:field="*{description}">
+											</div>
+										</div>
+									</div>
+
+									<input class="btn btn-primary" type="submit" value="Buscar" />
+								</form>
+							</div>
+							
+							<br>
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Descripci&oacute;n</th>
+											<th>Estado</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody th:each="e : ${p.activities}">
+										<tr>
+											<td th:text="${e.id}"></td>
+											<td th:text="${e.name}"></td>
+											<td th:text="${e.description}"></td>
+											<td th:text="${e.getState()}"></td>
+											<td><a class="btn btn-primary text-white" th:href="@{/detailActivity(idAct=${e.id}, idProj=${p.id})}"> Detalle</a>
+											<a class="btn btn-danger text-white" th:href="@{'/activity/delete/' + ${e.id}}">Eliminar</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="card mb-3">
+						<div class="card-header">M&eacute;tricas</div>
+						<div class="card-body">
+							<div class="button-bar float-md-right">
+								<a class="btn btn-primary text-white"
+									th:href="@{'/addWeekData/' + ${p.id}}">Actualizar</a>
+							</div>
+							<div class="col-md-12">
+								<div class="graphic">
+								</div>
+							</div>
+							<h3>Planned Valued</h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="a,iterStat : ${activities}">
+												<td th:text="${a.name}"></td>
+												<td th:each="pvd,iterStat : ${pvdata}" th:text="${pvd.value}" ></td>
+											</tr>
+											<tr>
+												<td>Cumulative Planned Value (EV)</td>
+												<td th:each="cpvd : ${cpvdata}" th:text="${cpvd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<h3>Earned Valued</h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="a : ${activities}">
+												<td th:text="${a.name}"></td>
+												<td th:each="evd : ${evdata}" th:text="${evd.value}"></td>
+											</tr>
+											<tr>
+												<td>Cumulative Earned Value (EV)</td>
+												<td th:each="cevd : ${cevdata}" th:text="${cevd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<h3>Actual Cost</h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="a : ${activities}">
+												<td th:text="${a.name}"></td>
+												<td th:each="acd : ${acdata}" th:text="${acd.value}"></td>
+											</tr>
+											<tr>
+												<td>Cumulative Actual Cost (AC)</td>
+												<td th:each="cacd : ${cacdata}" th:text="${cacd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<h3>Varianzas, &Iacute;ndices y Previsiones </h3>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th>Nombre</th>
+												<th th:each="header : ${weeks}" th:text="'Sem ' + ${header}">Id</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Cost Variance (CV)</td>
+												<td th:each="cvd : ${cvdata}" th:text="${cvd.value}"></td>
+											</tr>
+											<tr>
+												<td>Schedule Variance (SV)</td>
+												<td th:each="svd : ${svdata}" th:text="${svd.value}"></td>
+											</tr>
+											<tr>
+												<td>Cost Performance Index (CPI)</td>
+												<td th:each="cpid : ${cpidata}" th:text="${cpid.value}"></td>
+											</tr>
+											<tr>
+												<td>Schedule Performance Index (SPI)</td>
+												<td th:each="spid : ${spidata}" th:text="${spid.value}"></td>
+											</tr>
+											<tr>
+												<td>Estimate at Completion (EAC)</td>
+												<td th:each="eacd : ${eacdata}" th:text="${eacd.value}"></td>
+											</tr>
+											<tr>
+												<td>Estimate to Completion (ETC)</td>
+												<td th:each="etcd : ${etcdata}" th:text="${etcd.value}"></td>
+											</tr>
+											<tr>
+												<td>Variance at Completion (VAC)</td>
+												<td th:each="vacd : ${vacdata}" th:text="${vacd.value}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

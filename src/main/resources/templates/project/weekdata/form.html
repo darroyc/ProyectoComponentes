@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Registrar m&eacute;trica</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div class="card mb-3">
+					<div class="card-header">Registrar m&eacute;trica</div>
+					<div class="card-body">
+						<form action="#" th:action="@{/saveWeekData}"
+							th:object="${newWeekData}" method="POST">
+							<div class="form-row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="week">Periodo</label> <select
+											type="text" id="week" class="form-control"
+											th:field="*{weekDataId.week}">
+											<option th:each="entry: ${weeks}" th:value="${entry}" th:text="'Semana ' + ${entry}"></option>
+											</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="activity">Actividad</label> <select id="activity" class="form-control"
+											th:field="*{weekDataId.identifier}">
+												<option th:each="entry: ${activities}" th:value="${entry.id}" th:text="${entry.name}+' - TBC: '+${entry.expectedCost}"></option>
+											</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="type">Tipo</label> <select id="type" class="form-control"
+												th:field="*{weekDataId.type}">
+												<option value="PV">Costo presupuestado</option>
+												<option value="EV">Valor ganado</option>
+												<option value="AC">Costo real</option>
+											</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="value">Valor</label> <input
+											type="number" id="value" class="form-control"
+											th:field="*{value}">
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-md-12 button-bar">
+										<input class="btn btn-secondary" action="action" type="button" th:href="@{'/project/' + ${p}}" value="Atr&aacute;s"/> <input class="btn btn-primary" type="submit" value="Guardar cambios" />
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

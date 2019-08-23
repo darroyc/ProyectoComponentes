@@ -1,4 +1,4 @@
-package com.cenfotec.examen2;
+package com.cenfotec.pm;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Examen2ApplicationTests {
+public class PMApplicationTests {
 
 	@Test
 	public void contextLoads() {

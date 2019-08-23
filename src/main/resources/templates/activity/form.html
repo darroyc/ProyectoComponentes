@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Registrar actividad</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div class="card mb-3">
+					<div class="card-header">Registrar actividad</div>
+					<div class="card-body">
+						<form action="#" th:action="@{'/saveAct/' + ${projectId}}"
+							th:object="${newActivity}" method="POST">
+
+							<div class="form-row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="name">Nombre</label> <input
+											type="text" id="nameActivity" class="form-control"
+											th:field="*{name}">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="description">Descripci&oacute;n</label> <input
+											type="text" id="descriptionActivity" class="form-control"
+											th:field="*{description}">
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="expectedStartDate">Fecha de inicio esperada</label> <input
+											type="date" id="expectedStartDate" class="form-control"
+											th:field="*{expectedStartDate}">
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="actualStartDate">Fecha de inicio</label> <input
+											type="date" id="actualStartDate" class="form-control"
+											th:field="*{actualStartDate}">
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="expectedEndDate">Fecha de finalizaci&oacute;n esperada</label> <input
+											type="date" id="expectedEndDate" class="form-control"
+											th:field="*{expectedEndDate}">
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="actualEndDate">Fecha de finalizaci&oacute;n</label> <input
+											type="date" id="actualEndDate" class="form-control"
+											th:field="*{actualEndDate}">
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="expectedCost">Costo esperado</label> <input
+											type="number" id="expectedCost" class="form-control"
+											th:field="*{expectedCost}">
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="actualCost">Costo</label> <input
+											type="number" id="actualCost" class="form-control"
+											th:field="*{actualCost}">
+									</div>
+								</div>
+
+							</div>
+
+							<input class="btn btn-primary" type="submit" value="Guardar" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
