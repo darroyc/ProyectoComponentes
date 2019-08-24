@@ -40,7 +40,7 @@ spring:
             clientId: "5mhomhaf9j4158idgadoob9or2"
             clientSecret: "147jehhu3f3nhgfm11prmg7c3vhhmha8usa3o8jefq0jdb5nks21"
             scope: openid
-            redirectUriTemplate: "http://localhost:5000/login/oauth2/code/cognito"
+            redirectUriTemplate: "http://proyectocomponentes-env.dtsgq2pppd.us-east-2.elasticbeanstalk.com/login/oauth2/code/cognito"
             clientName: "Componentes"
         provider:
           cognito:

@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html;charset=ISO-8859-1" pageEncoding="ISO-8859-1" %> 
+
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/layout}">
+<head>
+<title>Editar proyecto</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col" layout:fragment="content">
+				<div class="card mb-3">
+					<div class="card-header">Editar proyecto</div>
+					<div class="card-body">
+						<form action="#" th:action="@{'/updateProj/' + ${p.id}}" th:object ="${p}" method="POST">
+
+							<div class="form-row">
+							
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="name">Nombre</label> <input type="text"
+												id="name" class="form-control" th:field="${p.name}"
+												required="required">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="description">Descripci&oacute;n</label> <input type="text"
+												id="description" class="form-control" th:field="${p.description}"
+												required="required">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for=owner>Due&ntilde;o</label> <input type="text"
+												id="owner" class="form-control" th:field="${p.owner}"
+												required="required" >
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label budget>Presupuesto</label> <input type="budget"
+												id="budget" class="form-control" th:field="${p.owner}"
+												required="required" >
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="startDate">Fecha inicio</label> <input type="date"
+												id="startDate" class="form-control" th:field="${p.startDate}">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="endDate">Fecha fin</label> <input type="date"
+												id="endDate" class="form-control" th:field="${p.endDate}"
+												required="required">
+										</div>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="col-md-4">
+											<input class="btn btn-primary" type="submit" value="Guardar cambios" />
+									</div>
+								</div>
+	
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
