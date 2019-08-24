@@ -113,6 +113,18 @@ public class ProjectController extends BaseController{
 		return "project/detail";
 	}
 	
+	@RequestMapping(value = "/graphic/{id}", method = RequestMethod.GET)
+	public String graphic(Model model, @PathVariable Long id) {
+		List<ProjectWeekData> cpvdata = projectWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_Type(id, "CPV");
+		List<ProjectWeekData> cevdata = projectWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_Type(id, "CAC");
+		List<ProjectWeekData> cacdata = projectWeekDataRepository.findByWeekDataId_IdentifierAndWeekDataId_Type(id, "CEV");
+		
+		model.addAttribute("cpvdata", cpvdata);
+		model.addAttribute("cacdata", cevdata);
+		model.addAttribute("cevdata", cacdata);
+		return "project/graphic";
+	}
+	
 	@RequestMapping(value = "/editProject/{id}", method = RequestMethod.GET)
 	public String projUpdate(Model model, @PathVariable Long id) {
 		Project p = null;
