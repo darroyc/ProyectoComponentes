@@ -7,51 +7,6 @@
 <head>
 <title>Detalle Proyecto</title>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<script type="text/javascript">
-    google.charts.load('current', {packages: ['line']});
-	google.setOnLoadCallback(drawChart);
-	debugger;
-    function drawChart() {
-
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Semana');
-        data.addColumn('number', 'Valor Planeado(PV)');
-        data.addColumn('number', 'Valor Ganado(EV)');
-        data.addColumn('number', 'Varianza del Costo(AC)');
-        
-        var cpvdata = [[${cpvdata}]]
-        var cacdata = [[${cacdata}]]
-        var cevdata = [[${cevdata}]]
-        
-        var list = [];
-        
-        for (var i = 0; i < list.length; i ++ ){
-            data.addRows([
-            	[cpvdata[i].weekDataId.week, cpvdata[i].value, cevdata[i].value, cacdata[i].value] 
-            	]);
-         }
-
-        var options = {
-          chart: {
-            title: 'Gr&aacute;fico de valor ganado',
-            subtitle: 'En d&ocaute;lares (USD)'
-          },
-          width: 900,
-          height: 500,
-          axes: {
-            x: {
-              0: {side: 'top'}
-            }
-          }
-        };
-
-        var chart = new google.charts.Line(document.getElementById('graphic'));
-
-        chart.draw(data, google.charts.Line.convertOptions(options));
-      }
-</script>
 </head>
 <body>
 	<div class="container">
@@ -186,11 +141,10 @@
 							<div class="button-bar float-md-right">
 								<a class="btn btn-primary text-white"
 									th:href="@{'/addWeekData/' + ${p.id}}">Actualizar</a>
+								<a class="btn btn-primary text-white"
+									th:href="@{'/graphic/' + ${p.id}}">Ver gr&aacute;fico</a>
 							</div>
-							<div class="col-md-12">
-								<div class="graphic">
-								</div>
-							</div>
+								
 							<h3>Planned Valued</h3>
 							<div class="col-md-12">
 								<div class="table-responsive">
@@ -207,7 +161,7 @@
 												<td th:each="pvd,iterStat : ${pvdata}" th:text="${pvd.value}" ></td>
 											</tr>
 											<tr>
-												<td>Cumulative Planned Value (EV)</td>
+												<td>Cumulative Planned Value (PV)</td>
 												<td th:each="cpvd : ${cpvdata}" th:text="${cpvd.value}"></td>
 											</tr>
 										</tbody>
